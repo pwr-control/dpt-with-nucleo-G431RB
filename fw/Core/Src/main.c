@@ -32,6 +32,11 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+	// Definisci i tempi qui (o in un file .h)
+	#define P1_TICKS (50 * 170)  // 50us @ 170MHz
+	#define GAP_TICKS (10 * 170) // 10us
+	#define P2_TICKS (20 * 170)  // 20us
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -60,6 +65,44 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+	/* Inizializzazione del contatore di cicli DWT */
+	void DWT_Init(void) {
+		CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+		DWT->CYCCNT = 0;
+		DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+	}
+
+	/* Funzione delay in microsecondi */
+	void delay_us(uint32_t us) {
+		uint32_t startTick = DWT->CYCCNT;
+		uint32_t delayTicks = us * (SystemCoreClock / 1000000);
+
+		while ((DWT->CYCCNT - startTick) < delayTicks);
+	}
+
+	void Run_DoublePulseTest(void) {
+		// 1. Configura il timer per il primo impulso
+		__HAL_TIM_SET_AUTORELOAD(&htim1, P1_TICKS * 170); // Assumendo clock a 170MHz
+		__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, P1_TICKS * 170);
+
+		// Avvia il PWM
+		HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+		// Attendi la fine del primo impulso (One Pulse Mode lo ferma)
+		while(__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_UPDATE) == RESET);
+		__HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_UPDATE);
+
+		// 2. Gap (Attesa precisa)
+		delay_us(GAP_TICKS);
+
+		// 3. Configura e avvia il secondo impulso
+		__HAL_TIM_SET_AUTORELOAD(&htim1, P2_TICKS * 170);
+		__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, P2_TICKS * 170);
+
+		HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+		// Fine test
+	}
 
 /* USER CODE END 0 */
 
@@ -122,6 +165,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  // Esempio: Esegui il test solo se premi il tasto blu (B1_Pin)
+	      if (HAL_GPIO_ReadPin(button_GPIO_Port, button_Pin) == GPIO_PIN_SET) {
+
+	          // Un piccolo debounce o attesa rilascio tasto
+	          HAL_Delay(500);
+
+	          // ESEGUE IL TEST UNA SOLA VOLTA
+	          Run_DoublePulseTest();
+
+	          // Protezione: aspetta che il tasto venga rilasciato prima di continuare
+	          while(HAL_GPIO_ReadPin(button_GPIO_Port, button_Pin) == GPIO_PIN_SET);
+	      }
 
     /* USER CODE END WHILE */
 

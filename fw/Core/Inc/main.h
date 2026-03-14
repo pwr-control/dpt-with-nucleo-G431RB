@@ -60,6 +60,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define button_Pin GPIO_PIN_13
+#define button_GPIO_Port GPIOC
 #define RCC_OSC32_OUT_Pin GPIO_PIN_14
 #define RCC_OSC32_OUT_GPIO_Port GPIOC
 #define RCC_OSC32_OUTC15_Pin GPIO_PIN_15
