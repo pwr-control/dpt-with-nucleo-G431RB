@@ -53,3 +53,61 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# --- Build Output ---
+Bin/
+Obj/
+List/
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.o
+*.d
+*.su
+
+# --- STM32CubeIDE / Eclipse Specific ---
+.Settings/
+Debug/
+Release/
+*.launch
+.metadata/
+RemoteSystemsTempFiles/
+.recommenders/
+
+# --- Keil uVision Specific ---
+*.uvguix.*
+*.uvgui.*
+*.bak
+*.dep
+*.iex
+*.lnp
+*.htm
+*.build_log.htm
+*.uvoptx
+*.uvprojx.bak
+*.uvoptx.bak
+
+# --- IAR Embedded Workbench Specific ---
+*.dep
+*.ewp.bak
+*.ewd.bak
+*.eww.bak
+*.dnx
+*.jlink
+*.custom_argvars
+settings/
+
+# --- OS / IDE Specific ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- CubeMX Generated (opzionale) ---
+# Se preferisci che gli altri rigenerino il codice da soli, 
+# decommenta le righe sotto. Solitamente però si tiene il codice generato.
+# MXTmpFiles/
