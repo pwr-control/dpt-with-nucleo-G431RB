@@ -98,7 +98,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Initialize leds */
@@ -122,7 +122,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // Esempio: Esegui il test solo se premi il tasto blu (B1_Pin)
+	    //STO
+	  	  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, 750);
+
+	    // Esempio: Esegui il test solo se premi il tasto blu (B1_Pin)
 	      if (HAL_GPIO_ReadPin(button_GPIO_Port, button_Pin) == GPIO_PIN_SET) {
 	    	  // Un piccolo debounce o attesa rilascio tasto
 	          HAL_Delay(500);
