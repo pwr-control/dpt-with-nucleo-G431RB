@@ -39,9 +39,9 @@
 /* USER CODE BEGIN PD */
 
 	// Definisci i tempi qui (o in un file .h)
-	#define P1_TICKS 		(100 * 170)  	/* 50us @ 170MHz */
-	#define GAP_TICKS 		(25 * 170) 		/* 10us */
-	#define P2_TICKS 		(25 * 170)  	/* 20us */
+	#define P1_TICKS 		(100 * 170)  	/* pulse 1 in ticks @ 170MHz */
+	#define GAP_US 			(50) 			/* gap in us */
+	#define P2_TICKS 		(25 * 170)  	/* pulse 2 in ticks @ 170MHz */
 
 /* USER CODE END PD */
 
@@ -56,7 +56,7 @@ COM_InitTypeDef BspCOMInit;
 
 /* USER CODE BEGIN PV */
 float p1_ticks = P1_TICKS;
-float gap_us = GAP_TICKS;
+float gap_us = GAP_US;
 float p2_ticks = P2_TICKS;
 int done = 0;
 int button_mirror = 0;
