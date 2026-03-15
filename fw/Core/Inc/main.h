@@ -70,6 +70,10 @@ void Error_Handler(void);
 #define RCC_OSC_IN_GPIO_Port GPIOF
 #define RCC_OSC_OUT_Pin GPIO_PIN_1
 #define RCC_OSC_OUT_GPIO_Port GPIOF
+#define pwm_top_enable_Pin GPIO_PIN_6
+#define pwm_top_enable_GPIO_Port GPIOC
+#define pwm_bottom_enable_Pin GPIO_PIN_7
+#define pwm_bottom_enable_GPIO_Port GPIOC
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
 #define T_SWCLK_Pin GPIO_PIN_14

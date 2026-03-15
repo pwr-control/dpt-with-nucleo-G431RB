@@ -1,10 +1,6 @@
 #include "dpt.h"
 #include "stm32g4xx_hal.h"
 
-	#define P1_TICKS 		(100 * 170)  	/* pulse 1 in ticks @ 170MHz */
-	#define GAP_US 			(50) 			/* gap in us */
-	#define P2_TICKS 		(25 * 170)  	/* pulse 2 in ticks @ 170MHz */
-
 // Parametri del test — definiti una volta sola qui
 uint32_t p1_ticks = P1_TICKS;
 uint32_t p2_ticks = P2_TICKS;
