@@ -7,9 +7,9 @@
 #include "tim.h"
 
 	#define CLOCK_PWM_MHZ   170  					/* PWM module clock input */
-	#define P1_TICKS 		(100 * CLOCK_PWM_MHZ)  	/* pulse time 1 in us per clock frequency = pulse 1 in ticks @ 170MHz */
-	#define GAP_US 			(25) 					/* gap in us */
-	#define P2_TICKS 		(25 * CLOCK_PWM_MHZ)  	/* pulse time 2 in us per clock frequency = pulse 2 in ticks @ 170MHz */
+	#define P1_TICKS 		(80 * CLOCK_PWM_MHZ)  	/* pulse time 1 in us per clock frequency = pulse 1 in ticks @ 170MHz */
+	#define GAP_US 			(10) 					/* gap in us */
+	#define P2_TICKS 		(10 * CLOCK_PWM_MHZ)  	/* pulse time 2 in us per clock frequency = pulse 2 in ticks @ 170MHz */
 
 // Parametri del test — definiti una volta sola qui
 extern uint32_t p1_ticks;
